@@ -1,53 +1,52 @@
-import React, { useReducer } from 'react'
-import { Redirect, Link } from 'react-router-dom'
-import {Button,Form,Input,FormGroup,Label} from 'reactstrap'
-
+import React, { useReducer } from 'react';
+import { Redirect, Link } from 'react-router-dom';
+import {Button,Form,Input,FormGroup,Label} from 'reactstrap';
 const initialState={
 todoTitle : "",
 todoBody  : "",
 todopostCompleted : false
-}
+};
 const reducer=(state,action)=>{
     switch(action.type){
      case  "Title":{
-         return{...state,todoTitle : action.value}
+         return{...state,todoTitle : action.value};
      }
      case "Body":{
-        return{...state,todoBody : action.value}
+        return{...state,todoBody : action.value};
      }
      case "postCompleted":{
-         return{...state,todopostCompleted : action.value}
+         return{...state,todopostCompleted : action.value};
      }
      default:{
-       return{...state}
+       return{...state};
      } 
-    }
-}
+    };
+};
 
-function NewPost() {
-    const name=localStorage.getItem("name")
-    const userID=localStorage.getItem("userData")
-    const [state, dispatch] = useReducer(reducer, initialState)
+const NewPost=()=>{
+    const name=localStorage.getItem("name");
+    const userID=localStorage.getItem("userData");
+    const [state, dispatch] = useReducer(reducer, initialState);
     const SubmitTheNewPost=(e)=>{
         e.preventDefault();
-         fetch('http://localhost:3000/posts', {
-        method: 'POST',
-        body: JSON.stringify({
-        title: state.todoTitle,
-        body: state.todoBody,
-        userId: userID,
-       }),
-      headers: {
-     'Content-type': 'application/json; charset=UTF-8',
-     },
-    })
-  .then((response) => response.json())
-  .then((json) => alert("Your Post is save"))
-  .catch(err=>alert("error, Try again"))
-  dispatch({type : "postCompleted" , value : true})
-    }
+        fetch('http://localhost:3000/posts', {
+            method: 'POST',
+            body: JSON.stringify({
+            title: state.todoTitle,
+            body: state.todoBody,
+            userId: userID,
+            }),
+            headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            },
+            })
+        .then((response) => response.json())
+        .then((json) => alert("Your Post is save"))
+        .catch(err=>alert("error, Try again"))
+        dispatch({type : "postCompleted" , value : true})
+    };
     if(state.todopostCompleted){
-       return(<Redirect to="/home"/>)
+       return(<Redirect to="/home"/>);
     }
     else
     {return (
@@ -71,7 +70,6 @@ function NewPost() {
             </Form>
  
         </div>
-    )}
+    );}
 }
-
-export default NewPost
+export default NewPost;

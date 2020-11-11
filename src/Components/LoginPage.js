@@ -1,32 +1,31 @@
-import React,{useReducer} from 'react'
-import { Redirect,Link } from 'react-router-dom'
-import {Button,Input,Form,FormGroup,Label} from 'reactstrap'
-import "./Form.css"
+import React,{useReducer} from 'react';
+import { Redirect,Link } from 'react-router-dom';
+import {Button,Input,Form,FormGroup,Label} from 'reactstrap';
+import "./Form.css";
 
 const initialState={
    username : "",
    password : "",
    islogin : false,
-   
-}
+};
 const reducer =(state,action)=>{
  switch(action.type){
      case "username":{
-         return{...state,username : action.value}
+        return{...state,username : action.value};
      }
      case "password":{
-         return{...state,password : action.value}
+        return{...state,password : action.value};
      }
      case "login":{
-         return{...state,islogin : action.value}
+        return{...state,islogin : action.value};
      }
      default:{
-         return{...state}
+        return{...state};
      }
  }
 }
 
-function Login() {
+const Login=()=> {
     const [state, dispatch] = useReducer(reducer, initialState)
     
     const SubmitAbout=(e)=>{
@@ -36,23 +35,22 @@ function Login() {
           .then((response) => response.json())
           .then((json) => {
               if(json.length===0){
-              alert("email and password is not found")
+              alert("email and password is not found");
              } 
              else{
-              console.log("login successful")
-              localStorage.setItem("userID",json[0].id)
-              localStorage.setItem("name",json[0].first_name+" "+json[0].last_name)
-              localStorage.setItem("img",json[0].avatar)
-              localStorage.setItem("email",json[0].email)
-              dispatch({type : "login" ,value : !state.islogin})
-              window.location.reload(false)
+              console.log("login successful");
+              localStorage.setItem("userID",json[0].id);
+              localStorage.setItem("name",json[0].first_name+" "+json[0].last_name);
+              localStorage.setItem("img",json[0].avatar);
+              localStorage.setItem("email",json[0].email);
+              dispatch({type : "login" ,value : !state.islogin});
+              window.location.reload(false);
             }})
-        .catch((error)=> alert("Something is incorrect , try after some  time "))
-        
-      }
+          .catch((error)=> alert("Something is incorrect , try after some  time "))
+        }
       
     if(state.islogin){
-        return(<Redirect to="/home"/>)
+        return(<Redirect to="/home"/>);
     }
     else{  
     return (
@@ -75,7 +73,6 @@ function Login() {
              </Form>
              </div>
          </div>
-    ) }
-}
-
-export default Login
+    ) };
+};
+export default Login;

@@ -1,11 +1,10 @@
-import React from 'react'
-import  {Input, Label} from 'reactstrap'
-import { Link } from 'react-router-dom'
-
-function Profile() {
-    const email = localStorage.getItem("email")
-    const img = localStorage.getItem("img")
-    const name = localStorage.getItem("name")
+import React from 'react';
+import  {Input, Label} from 'reactstrap';
+import { Link } from 'react-router-dom';
+const Profile=()=> {
+    const email = localStorage.getItem("email");
+    const img = localStorage.getItem("img");
+    const name = localStorage.getItem("name");
     return (
         <div className="PersonData">
            <img src={img} alt='NoImage'/>
@@ -18,7 +17,6 @@ function Profile() {
            <br/>
           <Link to="/home">Back</Link>
         </div>
-    )
-}
-
-export default Profile
+    );
+};
+export default Profile;

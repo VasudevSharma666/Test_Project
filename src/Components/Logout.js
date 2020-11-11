@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react'
-import { Redirect } from 'react-router-dom'
+import React, { useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 
-function Logout() {
+const Logout=()=> {
      
     useEffect(()=>{
-        var Feed = prompt("Enter your Express")
+        var Feed = prompt("Enter your Express");
 
         if(Feed!==null&& Feed!==""){
             if(Feed.trim()!==""){
@@ -20,25 +20,19 @@ function Logout() {
                  })   
             }
             else{
-                alert("nothing enter")
-            }
-            
+                alert("nothing enter");
+            };
         }
-        localStorage.removeItem("userID")
-        localStorage.removeItem("name")
-        localStorage.removeItem("email")
-        localStorage.removeItem("img")
-        window.location.reload(false)
- 
-    },[])
+        localStorage.removeItem("userID");
+        localStorage.removeItem("name");
+        localStorage.removeItem("email");
+        localStorage.removeItem("img");
+        window.location.reload(false);
+ },[])
 
-    return (
+ return (
     <div>
-        
-    <Redirect to="/"/>
+        <Redirect to="/"/>
     </div>
-    )
-    
-}
-
-export default Logout
+)};
+export default Logout;

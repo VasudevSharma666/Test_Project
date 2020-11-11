@@ -1,44 +1,44 @@
-import React, { useReducer,useEffect } from 'react'
+import React, { useReducer,useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import * as ReactBoot from 'reactstrap'
-import  "./Form.css"
+import * as ReactBoot from 'reactstrap';
+import  "./Form.css";
 
-var commt=""
+var commt="";
 const  initialState={
  name : "",
  posts: [],
  gotocomment : false,
  PostsLen : false
-}
+};
 const reducer=(state,action)=>{
 switch(action.type){
    case "name":{
-       return{...state,name : action.value}
+       return{...state,name : action.value};
    }
    case "posts":{
-       return{...state,posts : action.value}
+       return{...state,posts : action.value};
    }
    case "PostsLen":{
-       return{...state,PostsLen : action.value}
+       return{...state,PostsLen : action.value};
    }
    default:{
-      return{...state}
+      return{...state};
    }
 }
 }
-function HomePage() {
-      const [state, dispatch] = useReducer(reducer, initialState)
+const HomePage=()=>{
+    const [state, dispatch] = useReducer(reducer, initialState);
     const userID = localStorage.getItem("userID");
 
     useEffect(() => {
-        dispatch({type : "name", value : localStorage.getItem("name")})
+        dispatch({type : "name", value : localStorage.getItem("name")});
         
         fetch('http://localhost:3000/posts?userId='+userID)
         .then((response) => response.json())
         .then((json) => dispatch({type : "posts" ,value : json }))
         }, [userID])
  
-   const DeletedThePost=(e)=>{
+   const DeletedThePost=(e)=>{  
        fetch('http://localhost:3000/posts/'+e.target.id, {
             method: 'DELETE',
         })
@@ -46,11 +46,10 @@ function HomePage() {
         fetch('http://localhost:3000/comments?postId='+e.target.id, {
             method: 'DELETE',
                   })
-        window.location.reload(false);
-   }
+             window.location.reload(false);
+        }
 
    const ShowTheData  =()=>{ 
-     console.log(state.posts)
      return(<React.Fragment>
         {
             state.posts.map(post=>
@@ -67,20 +66,17 @@ function HomePage() {
                 )
         }
         
-        </React.Fragment>)
+        </React.Fragment>);
    }
   const NullPosts=()=>{
-      setTimeout(()=>{dispatch({type : "PostsLen",value : true})},3000)
+      setTimeout(()=>{dispatch({type : "PostsLen",value : true})},3000);
       if(state.PostsLen){
-          return(<div className="NoPosts"> No Posts available</div>)
+          return(<div className="NoPosts"> No Posts available</div>);
       }else{
-          return(<ReactBoot.Spinner />)
+          return(<ReactBoot.Spinner />);
       }
   }
-
-   
-   
-    return (
+  return (
         <React.Fragment  >
            <div className="HomePageBackground">
                 <ReactBoot.Navbar className="Navbar" style={{ backgroundColor  : "white" ,border : "2px solid gray"}}  >
@@ -100,7 +96,6 @@ function HomePage() {
                 <div className="StartPoint">{state.posts.length>0 ? <ShowTheData/>:<NullPosts />}</div>
          </div>
         </React.Fragment>
-    )
-}
-
+    );
+};
 export default HomePage;

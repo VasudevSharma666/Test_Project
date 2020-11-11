@@ -1,68 +1,56 @@
-import React,{useEffect,useReducer} from 'react'
-import { useLocation,Link } from 'react-router-dom'
-import * as ReactBoot from 'reactstrap'
+import React,{useEffect,useReducer} from 'react';
+import { useLocation,Link } from 'react-router-dom';
+import * as ReactBoot from 'reactstrap';
 const initialState={
    posts : [],
    comment : [],
    todoComment : ''
-}
+};
 
 const reducer=(state,action)=>{
  switch(action.type){
      case "posts":{
-         return{...state,posts : action.value}
+        return{...state,posts : action.value};
      }
      case "Comments":{
-         return{...state,comment : action.value}
+        return{...state,comment : action.value};
      }
      case "NewComment" :{
-         return{...state,todoComment : action.value}
+        return{...state,todoComment : action.value};
      }
      default:{
-
+        return{...state}
      }
  }
 }
 
-function CommentOnThePost() {
-    const [state, dispatch] = useReducer(reducer, initialState)
+const CommentOnThePost=()=> {
+    const [state, dispatch] = useReducer(reducer, initialState);
     const location = useLocation();
-    const postId = (location.pathname.match(/(\d+)/)[0]).toString()
-     console.log("show the Data"+state.posts.length)
+    const postId = (location.pathname.match(/(\d+)/)[0]).toString();
+
     useEffect(() => {
-        
-       fetch(`http://localhost:3000/posts/${postId}`)
+        fetch(`http://localhost:3000/posts/${postId}`)
         .then(res=>res.json())
         .then(json=>dispatch({type : "posts" , value : json}))
         .catch(err=>alert("something is error in post"+err))
-        console.log(state.posts)
+        
         
        fetch(`http://localhost:3000/comments?postId=${postId}`)
         .then(res=>res.json())
         .then(json=>dispatch({type : "Comments" , value : json}))
         .catch(err=>alert("something is error in Comments"+err))
-    },[state.posts])
- const ShowThePost=()=>{
+    },[state.posts]);
+    
+    const DeletedTheComment=(e)=>{
      
-     return(<React.Fragment>
-        <div>
-        <div id={state.posts.id}  className="divposts" >
-                 <h3> <span>-:Title:-</span> <br/> {state.posts.title}</h3> 
-                 <h3> <span>-:Body:-</span> <br/> {state.posts.body}</h3> 
-            </div>
-        </div>
-        </React.Fragment>)
- }
-
- const DeletedTheComment=(e)=>{
-     
-    fetch('http://localhost:3000/comments/'+e.target.id, {
+       fetch('http://localhost:3000/comments/'+e.target.id, {
         method: 'DELETE',
               })
-              window.location.reload(false);
- }
+        window.location.reload(false);
+    }
 
- const ShowTheComments=()=>{
+     const ShowTheComments=()=>{
        return(<React.Fragment>
         {
             state.comment.map(comment=><p key={comment.id} className="divposts">
@@ -74,33 +62,38 @@ function CommentOnThePost() {
                  </p>)
         }
         </React.Fragment>)
- }
+ };
 
  const SubmitTheComment=(e)=>{
     e.preventDefault();
     fetch('http://localhost:3000/comments', {
-    method: 'POST',
-    body: JSON.stringify({
-    postId: postId,
-    email : localStorage.getItem("email"),
-    body : state.todoComment,
-  }),
-  headers: {
-    'Content-type': 'application/json; charset=UTF-8',
-  },
-})
+        method: 'POST',
+        body: JSON.stringify({
+        postId: postId,
+        email : localStorage.getItem("email"),
+        body : state.todoComment,
+        }),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        },
+    })
   .then((response) => response.json())
   .then((json) => alert("Your comment is save"))
   window.location.reload(false);
- }
+ };
     return (
         <div className="StartPointOfComment">
-            <ShowThePost/>
+               <div>
+                   <div id={state.posts.id}  className="divposts" >
+                        <h3> <span>-:Title:-</span> <br/> {state.posts.title}</h3> 
+                        <h3> <span>-:Body:-</span> <br/> {state.posts.body}</h3> 
+                    </div>
+                </div>
+     
             <br/>
             <h2 className="Comment">Comments </h2>
             <hr/>
             <br/>
-        
             <ShowTheComments/>
             <Link to="/home">Back</Link>
             <hr/>
@@ -113,7 +106,5 @@ function CommentOnThePost() {
             </div>
         </div>
     )
-
-}
-
-export default CommentOnThePost
+};
+export default CommentOnThePost;
