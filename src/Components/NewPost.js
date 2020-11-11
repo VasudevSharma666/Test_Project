@@ -30,7 +30,6 @@ function NewPost() {
     const [state, dispatch] = useReducer(reducer, initialState)
     const SubmitTheNewPost=(e)=>{
         e.preventDefault();
-        console.log("new somthing is call"+state.todoBody+"-"+state.todoTitle)
          fetch('http://localhost:3000/posts', {
         method: 'POST',
         body: JSON.stringify({
@@ -53,23 +52,22 @@ function NewPost() {
     else
     {return (
         <div className="NewPostMaker">
-       
-       <Form onSubmit={SubmitTheNewPost} className="NewPostMakerForm">
-       <FormGroup>
-       From :-<h2>{name}</h2> 
-       </FormGroup>
-       <FormGroup>
-            <Label>Title</Label>
-            <Input type="text" value={state.todoTitle} onChange={e=>dispatch({type : "Title" ,value : e.target.value})} required  placeholder="Subject"/>
-            </FormGroup>
-            <FormGroup>
-            <Label>Body</Label>
-            <Input  className="postBody" value={state.todoBody} onChange={e=>dispatch({type : "Body" ,value : e.target.value})} required placeholder="body" />
-            </FormGroup>
-            <FormGroup>
-            <Button type="submit" className="btn-lg btn-dark ">Submit</Button>
-            </FormGroup>
-            <Link to="/home">Back</Link>
+           <Form onSubmit={SubmitTheNewPost} className="NewPostMakerForm">
+                <FormGroup>
+                     From :-<h2>{name}</h2> 
+               </FormGroup>
+               <FormGroup>
+                   <Label>Title</Label>
+                   <Input type="text" value={state.todoTitle} onChange={e=>dispatch({type : "Title" ,value : e.target.value})} required  placeholder="Subject"/>
+               </FormGroup>
+                <FormGroup>
+                   <Label>Body</Label>
+                   <Input  className="postBody" value={state.todoBody} onChange={e=>dispatch({type : "Body" ,value : e.target.value})} required placeholder="body" />
+                </FormGroup>
+                <FormGroup>
+                    <Button type="submit" className="btn-lg btn-dark ">Submit</Button>
+                </FormGroup>
+               <Link to="/home">Back</Link>
             </Form>
  
         </div>

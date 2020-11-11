@@ -1,6 +1,6 @@
 import React,{useReducer} from 'react'
 import './Form.css'
-import { Redirect } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import {Button,Label,Input,FormGroup,Form}  from 'reactstrap'
 
  const initialState={
@@ -32,7 +32,7 @@ const reducer =(state,action)=>{
     }
   }
 }
-function Regestation() {
+function Registration() {
     const [state, dispatch] = useReducer(reducer, initialState)
     const SubmitAbout=(e)=>{
         e.preventDefault();
@@ -60,13 +60,7 @@ function Regestation() {
         .then((response) => response.json())
         .then((json) => alert("you Data is save"),dispatch({type : "singup", value : !state.singup}))
         .catch((error)=> console.log("Somthing is incorrect , try after some  time "))
-         
-         
-
-          }
-        })
-       
-     }
+         }})}
         else{
           alert("email is invaled")
         }
@@ -80,28 +74,28 @@ function Regestation() {
     else
     {return (
         <div className="wrapperRegistration">
-        <Form onSubmit={SubmitAbout} className="Registration-from ">
-        <FormGroup>
-        <Label>First Name</Label>
-        <Input type="text"  value={state.first_name} onChange={e=>dispatch({type : "first_name" ,value : e.target.value})} required className="fadeIn second"/>
-        </FormGroup>
-        <FormGroup>
-        <Label>Last Name</Label>
-        <Input type="text" value={state.last_name} onChange={e=>dispatch({type : "last_name" ,value : e.target.value})} required className="fadeIn second"/>
-        </FormGroup>
-        <FormGroup>
-        <Label>Email   </Label>
-        <Input type="text" value={state.email} onChange={e=>dispatch({type : "email" ,value : e.target.value})} required className="fadeIn second"/>
-        </FormGroup>
-        <FormGroup>
-        <Label>Password</Label>
-        <Input type="password" value={state.password} onChange={e=>dispatch({type : "password" ,value : e.target.value})} required className="fadeIn second"/>
-        </FormGroup>
-        <Button type="submit" className="btn-lg btn-dark btn-block ">Submit</Button>
-        </Form>
+          <Form onSubmit={SubmitAbout} className="Registration-from ">
+            <FormGroup>
+              <Label>First Name</Label>
+              <Input type="text"  value={state.first_name} onChange={e=>dispatch({type : "first_name" ,value : e.target.value})} required className="fadeIn second"/>
+            </FormGroup>
+            <FormGroup>
+              <Label>Last Name</Label>
+              <Input type="text" value={state.last_name} onChange={e=>dispatch({type : "last_name" ,value : e.target.value})} required className="fadeIn second"/>
+            </FormGroup>
+            <FormGroup>
+              <Label>Email   </Label>
+              <Input type="text" value={state.email} onChange={e=>dispatch({type : "email" ,value : e.target.value})} required className="fadeIn second"/>
+            </FormGroup>
+            <FormGroup>
+              <Label>Password</Label>
+              <Input type="password" value={state.password} onChange={e=>dispatch({type : "password" ,value : e.target.value})} required className="fadeIn second"/>
+            </FormGroup>
+            <Button type="submit" className="btn-lg btn-dark btn-block ">Submit</Button>
+            <Link to="/">Back</Link>
+          </Form>
         </div>
     )}
 }
 
-export default Regestation
-
+export default Registration

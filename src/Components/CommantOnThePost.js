@@ -41,7 +41,7 @@ function CommentOnThePost() {
         .then(res=>res.json())
         .then(json=>dispatch({type : "Comments" , value : json}))
         .catch(err=>alert("something is error in Comments"+err))
-    },[])
+    },[state.posts])
  const ShowThePost=()=>{
      
      return(<React.Fragment>
@@ -66,11 +66,11 @@ function CommentOnThePost() {
        return(<React.Fragment>
         {
             state.comment.map(comment=><p key={comment.id} className="divposts">
-                <span>email:-</span>    {comment.email}
-                <br/>
-                <span>Comment:-</span>    {comment.body}
-                <br/>
-                <input type="image" id={comment.id} onClick={e=>DeletedTheComment(e)}  src="https://www.flaticon.com/svg/static/icons/svg/3159/3159662.svg" width="20" height="30"/>
+                    <span>email:-</span>    {comment.email}
+                    <br/>
+                    <span>Comment:-</span>    {comment.body}
+                    <br/>
+                    <input type="image" id={comment.id} onClick={e=>DeletedTheComment(e)}  src="https://www.flaticon.com/svg/static/icons/svg/3159/3159662.svg" width="20" height="30" alt="Delete"/>
                  </p>)
         }
         </React.Fragment>)
@@ -78,11 +78,9 @@ function CommentOnThePost() {
 
  const SubmitTheComment=(e)=>{
     e.preventDefault();
-
-    console.log("It working")
     fetch('http://localhost:3000/comments', {
-  method: 'POST',
-  body: JSON.stringify({
+    method: 'POST',
+    body: JSON.stringify({
     postId: postId,
     email : localStorage.getItem("email"),
     body : state.todoComment,
@@ -97,22 +95,22 @@ function CommentOnThePost() {
  }
     return (
         <div className="StartPointOfComment">
-       <ShowThePost/>
-        <br/>
-        <h2 className="Comment">Comments </h2>
-        <hr/>
-        <br/>
+            <ShowThePost/>
+            <br/>
+            <h2 className="Comment">Comments </h2>
+            <hr/>
+            <br/>
         
-        <ShowTheComments/>
-        <Link to="/home">Back</Link>
-        <hr/>
-        <div className="NewCommentAdder">
-        <ReactBoot.Form onSubmit={SubmitTheComment}>
-         <ReactBoot.Label>Comment</ReactBoot.Label>
-         <ReactBoot.Input type="text"  value={state.todoComment} onChange={e=>{dispatch({type : "NewComment" , value : e.target.value})}} placeholder="Comment" />
-         <ReactBoot.Button type="submit">Submit</ReactBoot.Button>
-         </ReactBoot.Form>
-         </div>
+            <ShowTheComments/>
+            <Link to="/home">Back</Link>
+            <hr/>
+            <div className="NewCommentAdder">
+                <ReactBoot.Form onSubmit={SubmitTheComment}>
+                <ReactBoot.Label>Comment</ReactBoot.Label>
+                <ReactBoot.Input type="text"  value={state.todoComment} onChange={e=>{dispatch({type : "NewComment" , value : e.target.value})}} placeholder="Comment" />
+                <ReactBoot.Button type="submit">Submit</ReactBoot.Button>
+                </ReactBoot.Form>
+            </div>
         </div>
     )
 

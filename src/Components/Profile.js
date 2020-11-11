@@ -1,5 +1,5 @@
 import React from 'react'
-import  {Button,Form,Input,FormGroup, Label} from 'reactstrap'
+import  {Input, Label} from 'reactstrap'
 import { Link } from 'react-router-dom'
 
 function Profile() {
@@ -8,7 +8,7 @@ function Profile() {
     const name = localStorage.getItem("name")
     return (
         <div className="PersonData">
-           <img src={img}/>
+           <img src={img} alt='NoImage'/>
            <br/>
            <Label>Name</Label>
            <Input type="text" value={name} readonly /> 

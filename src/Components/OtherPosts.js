@@ -1,4 +1,4 @@
-import React,{useEffect,useState,useReducer } from 'react'
+import React,{useEffect,useReducer } from 'react'
 import {Link} from 'react-router-dom'
 import { Navbar } from 'reactstrap'
 var Comment =""
@@ -22,6 +22,7 @@ const reducer=(state,action)=>{
 }
 function OtherPosts() {
  const [state, dispatch] = useReducer(reducer, initialState)
+ 
  useEffect(()=>{
     fetch('http://localhost:3000/posts')
     .then((response) => response.json())

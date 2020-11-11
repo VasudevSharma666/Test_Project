@@ -68,14 +68,10 @@ background-color: beige;
   box-shadow: 5px 10px 18px gray;
 }
 
+
 span{
   color :green;
 }
-
-
-
-
-
 .NameOfPerson{
   text-transform: uppercase;
    color: blue; 
@@ -86,6 +82,11 @@ span{
   top : 250px;
 }
 
+.StartPointOfFeed{
+  position: absolute;
+  top : 250px;
+   left: 800px; 
+}
 .divposts{
   border-radius: 25px;
   background-color: gainsboro;
@@ -131,7 +132,7 @@ span{
   border-radius: 5px;
   background-color: gainsboro;
   max-width: 15%;
-  height: 5%;
+  height: 7%;
   box-shadow: 5px 10px 10px gray;
 }
 
