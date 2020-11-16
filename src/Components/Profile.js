@@ -1,6 +1,8 @@
 import React from "react";
+
 import { Input, Label } from "reactstrap";
 import { Link } from "react-router-dom";
+
 const Profile = () => {
   const email = localStorage.getItem("email");
   const img = localStorage.getItem("img");

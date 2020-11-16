@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Switch, Route } from 'react-router-dom';
 import Login from './Components/LoginPage';
 import HomePage from './Components/HomePage';
@@ -38,6 +39,7 @@ const Authentication=()=>{
 const MainFile=()=> {
     return (
         <div>
+          
            <h1 align="center" className="Facebook">Facebook</h1>
            <Authentication/>
         </div>

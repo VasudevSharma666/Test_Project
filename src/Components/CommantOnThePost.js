@@ -1,6 +1,8 @@
 import React, { useEffect, useReducer } from "react";
+
 import { useLocation, Link } from "react-router-dom";
 import * as ReactBoot from "reactstrap";
+
 const initialState = {
   posts: [],
   comment: [],
@@ -39,7 +41,7 @@ const CommentOnThePost = () => {
       .then((res) => res.json())
       .then((json) => dispatch({ type: "Comments", value: json }))
       .catch((err) => alert("something is error in Comments" + err));
-  }, [state.posts]);
+  }, [state.posts, postId]);
 
   const DeletedTheComment = (e) => {
     fetch("http://localhost:3000/comments/" + e.target.id, {

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+
 import { Navbar } from "reactstrap";
 import { Link } from "react-router-dom";
-function FeedBack() {
+
+const FeedBack = () => {
   const [state, setstate] = useState([]);
   useEffect(() => {
     fetch("http://localhost:3000/Feedback")
@@ -32,5 +34,5 @@ function FeedBack() {
       </div>
     </React.Fragment>
   );
-}
+};
 export default FeedBack;
